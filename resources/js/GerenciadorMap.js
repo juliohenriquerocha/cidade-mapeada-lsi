@@ -32,6 +32,9 @@ function initMap() {
 	var redeprivada = getLayer("redeprivada");
 	var fundacentro = getLayer("fundacentro");
 	var comunidadesTerapeuticas = getLayer("comunidadesTerapeuticas");
+	
+	var sine = getLayer("sine");
+	var receitaFederal = getLayer("receitafederal");
 
 	//Controles
 	map.addControl(new OpenLayers.Control.LayerSwitcher(
@@ -39,7 +42,7 @@ function initMap() {
 				}));
 	
 	map.addLayer(gmap);
-	map.addLayers([ubs, cras, creas, redeprivada, fundacentro, comunidadesTerapeuticas]);
+	map.addLayers([ubs, cras, creas, redeprivada, fundacentro, comunidadesTerapeuticas, sine, receitaFederal]);
 	
 	setCenterPoint();
 }
@@ -66,7 +69,6 @@ function getLayer(layerName) {
 }
 
 function setCenterPoint() {
-
 	var lat = -12.382928;
 	var lon = -50.273437;
 	var center = new OpenLayers.LonLat(lon, lat).transform(
@@ -87,7 +89,7 @@ function codeAddress() {
 			var lonlat = new OpenLayers.LonLat(lon, lat).transform(
 					new OpenLayers.Projection("EPSG:4326"), map
 							.getProjectionObject());
-			map.setCenter(lonlat, 12);
+			map.setCenter(lonlat, 14);
 		} else {
 			alert('Impossível achar essa localidade: ' + status);
 		}

@@ -5,6 +5,7 @@ var map;
 var marker; 
 var markers;
 var markerPath = './resources/images/icons/marker.png';
+var geoserverURL = "http://150.165.75.171:8081/geoserver/DadosAbertos/wms";
 var geocoder;
 
 function initMap() {
@@ -24,6 +25,13 @@ function initMap() {
         "Google Streets", // the default
         {numZoomLevels: 20, visibility: false}
     );
+	
+	var ubs = getLayer("ubs");
+	var creas = getLayer("creas");
+	var cras = getLayer("cras");
+	var redeprivada = getLayer("redeprivada");
+	var fundacentro = getLayer("fundacentro");
+	var comunidadesTerapeuticas = getLayer("comunidadesTerapeuticas");
 
 	//Controles
 	map.addControl(new OpenLayers.Control.LayerSwitcher(
@@ -31,18 +39,39 @@ function initMap() {
 				}));
 	
 	map.addLayer(gmap);
+	map.addLayers([ubs, cras, creas, redeprivada, fundacentro, comunidadesTerapeuticas]);
 	
 	setCenterPoint();
-	
+}
+
+function getLayer(layerName) {
+
+	var layer = new OpenLayers.Layer.WMS(layerName, geoserverURL, {
+		layers : 'DadosAbertos:' + layerName,
+		transparent : true
+	}, {
+		tileOptions : {
+			maxGetUrlLength : 2048
+		},
+		singleTile : true,
+		ratio : 1,
+		displayOutsideMaxExtent : true,
+		visibility : false,
+		yx : {
+			'EPSG:4326' : true
+		}
+	});
+
+	return layer;
 }
 
 function setCenterPoint() {
 
-	var lat = -7.22;
-	var lon = -35.88;
+	var lat = -12.382928;
+	var lon = -50.273437;
 	var center = new OpenLayers.LonLat(lon, lat).transform(
 			new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
-	map.setCenter(center, 12);
+	map.setCenter(center, 4);
 }
 
 function codeAddress() {

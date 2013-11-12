@@ -26,15 +26,15 @@ function initMap() {
         {numZoomLevels: 20, visibility: false}
     );
 	
-	var ubs = getLayer("ubs");
-	var creas = getLayer("creas");
-	var cras = getLayer("cras");
-	var redeprivada = getLayer("redeprivada");
-	var fundacentro = getLayer("fundacentro");
-	var comunidadesTerapeuticas = getLayer("comunidadesTerapeuticas");
+	var ubs = getLayer("ubs", "Unidades Básicas de Saúde");
+	var creas = getLayer("creas", "CREAS");
+	var cras = getLayer("cras", "CRAS");
+	var redeprivada = getLayer("redeprivada", "Rede Privada de Assistência Social");
+	//var fundacentro = getLayer("fundacentro", "Estruturas de Fundacentro");
+	var comunidadesTerapeuticas = getLayer("comunidadesTerapeuticas", "Comunidades Terapeuticas");
 	
-	var sine = getLayer("sine");
-	var receitaFederal = getLayer("receitafederal");
+	var sine = getLayer("sine", "Sistema Nacional de Empregos");
+	var receitaFederal = getLayer("receitafederal", "Unidades de Atendimento da Receita Federal");
 
 	//Controles
 	map.addControl(new OpenLayers.Control.LayerSwitcher(
@@ -42,14 +42,14 @@ function initMap() {
 				}));
 	
 	map.addLayer(gmap);
-	map.addLayers([ubs, cras, creas, redeprivada, fundacentro, comunidadesTerapeuticas, sine, receitaFederal]);
+	map.addLayers([ubs, cras, creas, redeprivada, comunidadesTerapeuticas, sine, receitaFederal]);
 	
 	setCenterPoint();
 }
 
-function getLayer(layerName) {
+function getLayer(layerName, name) {
 
-	var layer = new OpenLayers.Layer.WMS(layerName, geoserverURL, {
+	var layer = new OpenLayers.Layer.WMS(name, geoserverURL, {
 		layers : 'DadosAbertos:' + layerName,
 		transparent : true
 	}, {

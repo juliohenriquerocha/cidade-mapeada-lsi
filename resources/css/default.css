@@ -12,7 +12,7 @@ html,body {
 	float: left;
 }
 
-#layerSwitcher{
+.layerSwitcher{
 	width: 15%;
 	height: 100%;
 	float: left;
@@ -45,4 +45,9 @@ html,body {
 	color: #575757;
 	padding-bottom: 15px;
 	font-weight: bold;
+}
+
+/** Modificações **/
+.navbar-brand {
+	padding: 9px 15px;
 }

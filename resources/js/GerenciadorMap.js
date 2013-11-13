@@ -7,6 +7,9 @@ var markers;
 var markerPath = './resources/images/icons/marker.png';
 var geoserverURL = "http://150.165.75.171:8081/geoserver/DadosAbertos/wms";
 var geocoder = new google.maps.Geocoder();
+var info;
+var currentInfoLayer, currentInfoName;
+OpenLayers.ProxyHost = "./resources/cgi-bin/proxy.cgi?url=";
 
 function initMap() {
 	map = new OpenLayers.Map("map",{
@@ -16,8 +19,7 @@ function initMap() {
 			}),
 			new OpenLayers.Control.Attribution(),
 			new OpenLayers.Control.PanZoom()
-		],
-		projection: "EPSG:4326"
+		]
 	});
 	
 	gmap = new OpenLayers.Layer.Google(
@@ -44,6 +46,25 @@ function initMap() {
 	map.addLayers([ubs, cras, creas, redeprivada, fundacentro, comunidadesTerapeuticas, sine, receitaFederal]);
 	
 	setCenterPoint();
+	
+	info = new OpenLayers.Control.WMSGetFeatureInfo({
+		url : geoserverURL,
+		title : 'InfoBox',
+		queryVisible : true,
+		maxFeatures : 1,
+		infoFormat : 'application/vnd.ogc.gml',
+		eventListeners : {
+			getfeatureinfo : function(event) {
+				var features = this.format.read(event.text);
+				if(features.length == 0) return;
+				currentInfoLayer = features[0].gml.featureType;
+				var mensagem = createDataTableInformation(features[0].data);
+				openInformation(mensagem);
+			}
+		}
+	});
+	map.addControl(info);
+	info.activate();
 }
 
 function getLayer(layerName, name) {
@@ -99,7 +120,7 @@ function codeAddress() {
 							.getProjectionObject());
 			map.setCenter(lonlat, 14);
 		} else {
-			alert('Impossível achar essa localidade: ' + status);
+			alert('Impossï¿½vel achar essa localidade: ' + status);
 		}
 	});
 }
@@ -120,7 +141,7 @@ function codeAddressIndex() {
 			window.location.href = newUrl;
 			
 		} else {
-			alert('Impossível achar essa localidade: ' + status);
+			alert('ImpossÃ­vel achar essa localidade: ' + status);
 		}
 	});
 }
@@ -131,5 +152,95 @@ function getUrlVars() {
         vars[key] = value;
     });
     return vars;
+}
+
+function formatInfomation(features) {
+	var html = '<table class="table table-striped table-condensed">';
+	if (features && features.length) {
+		for ( var i = 0, len = features.length; i < len; i++) {
+			var feature = features[i];
+			var attributes = feature.attributes;
+			for ( var k in attributes) {
+				html += '<tr><th align="left">' + k.replace(/_/gi, ' ')
+						+ '</th><td>' + attributes[k] + '</td></tr>';
+
+			}
+
+		}
+	}
+	return html += '</table>';
+}
+
+function createDataTableInformation(data){
+	var div = document.createElement("div");
+	var table = document.createElement("table");
+	var thead = document.createElement("thead");
+	var trTHead = document.createElement("tr");
+	var thField = document.createElement("th");
+	thField.innerHTML = "Campo";
+	var thValue = document.createElement("th");
+	thValue.innerHTML = "Valor";
+	
+	trTHead.appendChild(thField);
+	trTHead.appendChild(thValue);
+	
+	thead.appendChild(trTHead);
+	
+	table.appendChild(thead);
+	
+	table.setAttribute("class", "table table-hover");
+	for (var key in data){
+		var tr = document.createElement("tr");
+		
+		var value = data[key];
+		
+		var tdField = document.createElement("td");
+		var tdValue = document.createElement("td");
+		
+		tdField.innerHTML = key + ": ";
+		tdValue.innerHTML = value;
+		
+		tr.appendChild(tdField);
+		tr.appendChild(tdValue);
+		
+		table.appendChild(tr);
+	}
+	div.appendChild(table);
+	return div.innerHTML;
+}
+
+function openInformation(mensagem){
+	bootbox.dialog({
+		  message: mensagem,
+		  title: "InformaÃ§Ã£o",
+		  buttons: {
+			    success: {
+			      label: "Twitter",
+			      className: "btn-twitter",
+			      callback: function() {
+			        twitterShare();
+			      }
+			    },
+			    danger: {
+			      label: "Facebook",
+			      className: "btn-primary",
+			      callback: function() {
+			        facebookShare();
+			      }
+			    },
+			    main: {
+			      label: "Fechar",
+			      className: "btn-danger"
+			    }
+			  }
+		});
+}
+
+function facebookShare(){
+	alert("Facebook - Camada: " + currentInfoLayer);
+}
+
+function twitterShare(){
+	alert("Twitter - Camada: " + currentInfoLayer);
 }
 

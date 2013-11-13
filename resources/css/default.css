@@ -56,3 +56,16 @@ h1, .h1 {
 .navbar-brand {
 	padding: 9px 15px;
 }
+
+.btn-twitter {
+	color: #fff;
+	background-color: #1ab7ea;
+	border-color: #1796c0
+}
+
+.btn-twitter:hover,.btn-twitter:focus,.btn-twitter:active,.btn-twitter.active,.open .dropdown-toggle.btn-twitter
+	{
+	color: #fff;
+	background-color: #3abde8;
+	border-color: #1796c0
+}

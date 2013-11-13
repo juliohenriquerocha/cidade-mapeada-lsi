@@ -27,15 +27,15 @@ function initMap() {
         {numZoomLevels: 20, visibility: false}
     );
 	
-	var ubs = getLayer("ubs", "Unidades Básicas de Saúde");
-	var creas = getLayer("creas", "CREAS");
-	var cras = getLayer("cras", "CRAS");
-	var redeprivada = getLayer("redeprivada", "Rede Privada de Assistência Social");
-	var fundacentro = getLayer("fundacentro", "Estruturas de Fundacentro");
-	var comunidadesTerapeuticas = getLayer("comunidadesTerapeuticas", "Comunidades Terapeuticas");
-	
-	var sine = getLayer("sine", "Sistema Nacional de Empregos");
-	var receitaFederal = getLayer("receitafederal", "Unidades de Atendimento da Receita Federal");
+	var ubs = getLayer("ubs", "Unidades Básicas de Saúde", "resources/images/ubsIcon.png");
+	var creas = getLayer("creas", "CREAS", "resources/images/creasIcon.png");
+	var cras = getLayer("cras", "CRAS", "resources/images/crasIcon.png");
+	var redeprivada = getLayer("redeprivada", "Rede Privada de Assistência Social", "resources/images/assistenciaSocialIcon.png");
+	var fundacentro = getLayer("fundacentro", "Estruturas de Fundacentro", "resources/images/fundacentroIcon.png");
+	var comunidadesTerapeuticas = getLayer("comunidadesTerapeuticas", "Comunidades Terapeuticas", "resources/images/comunidadeTerapeuticaIcon.png");
+	var cartorio = getLayer("cartorio", "Cartório", "resources/images/cartorioIcon.png");
+	var sine = getLayer("sine", "Sistema Nacional de Empregos", "resources/images/sineIcon.png");
+	var receitaFederal = getLayer("receitafederal", "Unidades de Atendimento da Receita Federal", "resources/images/receitaFederalIcon.png");
 
 	//Controles
 	map.addControl(new OpenLayers.Control.LayerSwitcher(
@@ -43,7 +43,7 @@ function initMap() {
 				}));
 	
 	map.addLayer(gmap);
-	map.addLayers([ubs, cras, creas, redeprivada, fundacentro, comunidadesTerapeuticas, sine, receitaFederal]);
+	map.addLayers([ubs, cras, creas, redeprivada, fundacentro, comunidadesTerapeuticas, cartorio, sine, receitaFederal]);
 	
 	setCenterPoint();
 	
@@ -67,8 +67,9 @@ function initMap() {
 	info.activate();
 }
 
-function getLayer(layerName, name) {
-
+function getLayer(layerName, name, icon) {
+	var metadata = new Array();
+	metadata["icon"] = icon;
 	var layer = new OpenLayers.Layer.WMS(name, geoserverURL, {
 		layers : 'DadosAbertos:' + layerName,
 		transparent : true
@@ -80,6 +81,7 @@ function getLayer(layerName, name) {
 		ratio : 1,
 		displayOutsideMaxExtent : true,
 		visibility : false,
+		metadata: metadata,
 		yx : {
 			'EPSG:4326' : true
 		}
@@ -236,11 +238,17 @@ function openInformation(mensagem){
 		});
 }
 
+var pathname = location.href;
+
 function facebookShare(){
-	alert("Facebook - Camada: " + currentInfoLayer);
+	//alert("Facebook - Camada: " + currentInfoLayer);
+	var fb = "http://www.facebook.com/sharer.php?u=" + pathname;
+	window.open(fb);
 }
 
 function twitterShare(){
-	alert("Twitter - Camada: " + currentInfoLayer);
+	//alert("Twitter - Camada: " + currentInfoLayer);
+	var t = "http://twitter.com/share?url=" + pathname;
+	window.open(t);
 }
 

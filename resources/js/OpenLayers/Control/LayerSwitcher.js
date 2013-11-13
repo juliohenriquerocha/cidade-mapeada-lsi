@@ -334,12 +334,12 @@ OpenLayers.Control.LayerSwitcher = OpenLayers
 								var tdBodyColorSpan = null;
 								
 							    if(baseLayer){
-							    	var icon = '../../../resources/images/icon_globe.png';
+							    	var icon = 'resources/images/icon_globe.png';
 									tdBodyColorSpan = document
 									.createElement("img");
 									tdBodyColorSpan.setAttribute("src", icon);				
-							    }else if (layer.metadata["isPOI"] != null) {
-									var icon = layer.metadata["iconPOI"];
+							    }else if (layer.metadata["icon"] != null) {
+									var icon = layer.metadata["icon"];
 									tdBodyColorSpan = document
 									.createElement("img");
 									tdBodyColorSpan.setAttribute("src", icon);

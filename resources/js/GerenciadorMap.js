@@ -30,7 +30,7 @@ function initMap() {
 	var creas = getLayer("creas", "CREAS");
 	var cras = getLayer("cras", "CRAS");
 	var redeprivada = getLayer("redeprivada", "Rede Privada de Assistência Social");
-	//var fundacentro = getLayer("fundacentro", "Estruturas de Fundacentro");
+	var fundacentro = getLayer("fundacentro", "Estruturas de Fundacentro");
 	var comunidadesTerapeuticas = getLayer("comunidadesTerapeuticas", "Comunidades Terapeuticas");
 	
 	var sine = getLayer("sine", "Sistema Nacional de Empregos");
@@ -42,7 +42,7 @@ function initMap() {
 				}));
 	
 	map.addLayer(gmap);
-	map.addLayers([ubs, cras, creas, redeprivada, comunidadesTerapeuticas, sine, receitaFederal]);
+	map.addLayers([ubs, cras, creas, redeprivada, fundacentro, comunidadesTerapeuticas, sine, receitaFederal]);
 	
 	setCenterPoint();
 }

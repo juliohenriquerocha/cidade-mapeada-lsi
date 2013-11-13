@@ -236,11 +236,17 @@ function openInformation(mensagem){
 		});
 }
 
+var pathname = location.href;
+
 function facebookShare(){
-	alert("Facebook - Camada: " + currentInfoLayer);
+	//alert("Facebook - Camada: " + currentInfoLayer);
+	var fb = "http://www.facebook.com/sharer.php?u=" + pathname;
+	window.open(fb);
 }
 
 function twitterShare(){
-	alert("Twitter - Camada: " + currentInfoLayer);
+	//alert("Twitter - Camada: " + currentInfoLayer);
+	var t = "http://twitter.com/share?url=" + pathname;
+	window.open(t);
 }
 

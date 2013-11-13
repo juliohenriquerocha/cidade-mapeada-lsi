@@ -24,25 +24,46 @@
 <body onload="initMap()">
 
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#bs-example-navbar-collapse-6">
-				<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
-				<span class="icon-bar"></span> <span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#">Brasil Mapeado <img src='resources/images/icon_logo.png'/></a>
-		</div>
-	</nav>
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse"
+			data-target="#bs-example-navbar-collapse-6">
+			<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
+			<span class="icon-bar"></span> <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="#">Brasil Mapeado <img src='resources/images/icon_logo.png'/></a>
+	</div>
 
-	<div id="contentInicial" style="height: 500px; padding-top: 100px; align: center">
-		<center>
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+		<ul class="nav navbar-nav">
+			<li class="active"><a href="#">Mapa</a></li>
+			<li><a href="sobre.html">Sobre</a></li>
+			<li><a href="#">Dados</a></li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+		<div class="navbar-form navbar-left">
 			<div class="form-group">
-				<input type="text" id='inputCidadeInicial' class="form-control" 
-					placeholder="Digite nome da Cidade" style="width: 300px;">
+				<input type="text" id='inputCidade' class="form-control" placeholder="Cidade/Endereço desejada(o)">
 			</div>
-			<button class="btn btn-default" onclick="codeAddressIndex()">Buscar</button>
-		</center>
+			<button class="btn btn-default" onclick="codeAddress()">Buscar</button>
+		</div>
+		</ul>
+	</div>
+	<!-- /.navbar-collapse --> </nav>
+
+	<div id="content">
+		<div id='map'></div>
+		<div class="panel panel-primary layerSwitcher">
+        <div class="panel-heading">
+          <h3 class="panel-title">Painel de Camadas</h3>
+        </div>
+        <div class="panel-body">
+          <div id='layerSwitcher'></div>
+        </div>
+      </div>
+		
+		<div style="clear: both"></div>
 	</div>
 
 	<div id="footer">

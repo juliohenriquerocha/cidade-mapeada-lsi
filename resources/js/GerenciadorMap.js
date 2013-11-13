@@ -91,7 +91,32 @@ function codeAddress() {
 							.getProjectionObject());
 			map.setCenter(lonlat, 14);
 		} else {
-			alert('ImpossÃ­vel achar essa localidade: ' + status);
+			alert('Impossível achar essa localidade: ' + status);
+		}
+	});
+}
+
+function codeAddressIndex() {
+	var address = document.getElementById('inputCidadeInicial').value;
+
+	geocoder.geocode({
+		'address' : address
+	}, function(results, status) {
+
+		if (status == google.maps.GeocoderStatus.OK) {
+			var lon = results[0].geometry.location.lng();
+			var lat = results[0].geometry.location.lat();
+			
+			var newUrl = window.location.href.substring(0, window.location.href.length-10) + "mapa.html";
+			
+			var lonlat = new OpenLayers.LonLat(lon, lat).transform(
+					new OpenLayers.Projection("EPSG:4326"), map
+							.getProjectionObject());
+			map.setCenter(lonlat, 14);
+			
+			
+		} else {
+			alert('Impossível achar essa localidade: ' + status);
 		}
 	});
 }

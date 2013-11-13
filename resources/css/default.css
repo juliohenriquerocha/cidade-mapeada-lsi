@@ -5,6 +5,12 @@ html,body {
 	font-family: 'Open Sans';
 }
 
+h1, .h1 {
+	font-size: 20px;
+	font-color: #436976;
+	color: #436976;
+}
+
 #map{
 	width: 85%;
 	min-height: 550px;
@@ -20,7 +26,7 @@ html,body {
 
 #content {
 	width: 100%;
-	min-height: 580px;
+	min-height: 600px;
 	height: 80%;
 	margin-right: auto;
 	margin-left: auto;

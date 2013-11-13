@@ -6,10 +6,9 @@ var marker;
 var markers;
 var markerPath = './resources/images/icons/marker.png';
 var geoserverURL = "http://150.165.75.171:8081/geoserver/DadosAbertos/wms";
-var geocoder;
+var geocoder = new google.maps.Geocoder();
 
 function initMap() {
-	geocoder = new google.maps.Geocoder();
 	map = new OpenLayers.Map("map",{
 		controls: [
 			new OpenLayers.Control.Navigation({
@@ -69,11 +68,20 @@ function getLayer(layerName, name) {
 }
 
 function setCenterPoint() {
-	var lat = -12.382928;
-	var lon = -50.273437;
-	var center = new OpenLayers.LonLat(lon, lat).transform(
-			new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
-	map.setCenter(center, 4);
+	var lat = getUrlVars()["lat"];
+	var lng = getUrlVars()["lng"];
+	
+	if(lat == null || lng == null){
+		lat = -12.382928;
+		lon = -50.273437;
+		var center = new OpenLayers.LonLat(lon, lat).transform(
+				new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+		map.setCenter(center, 4);
+	}else{
+		var center = new OpenLayers.LonLat(lng, lat).transform(
+				new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+		map.setCenter(center, 14);
+	}
 }
 
 function codeAddress() {
@@ -97,6 +105,7 @@ function codeAddress() {
 }
 
 function codeAddressIndex() {
+	
 	var address = document.getElementById('inputCidadeInicial').value;
 
 	geocoder.geocode({
@@ -107,16 +116,20 @@ function codeAddressIndex() {
 			var lon = results[0].geometry.location.lng();
 			var lat = results[0].geometry.location.lat();
 			
-			var newUrl = window.location.href.substring(0, window.location.href.length-10) + "mapa.html";
-			
-			var lonlat = new OpenLayers.LonLat(lon, lat).transform(
-					new OpenLayers.Projection("EPSG:4326"), map
-							.getProjectionObject());
-			map.setCenter(lonlat, 14);
-			
+			var newUrl = window.location.href.substring(0, window.location.href.length-10) + "mapa.html?lat="+lat + "&lng="+lon;
+			window.location.href = newUrl;
 			
 		} else {
 			alert('Impossível achar essa localidade: ' + status);
 		}
 	});
 }
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+

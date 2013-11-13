@@ -139,7 +139,7 @@ function codeAddressIndex() {
 			var lon = results[0].geometry.location.lng();
 			var lat = results[0].geometry.location.lat();
 			
-			var newUrl = window.location.href.substring(0, window.location.href.length-10) + "mapa.html?lat="+lat + "&lng="+lon;
+			var newUrl = window.location.href + "mapa.html?lat="+lat + "&lng="+lon;
 			window.location.href = newUrl;
 			
 		} else {

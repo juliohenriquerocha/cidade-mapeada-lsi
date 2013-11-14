@@ -11,6 +11,24 @@ var info;
 var currentInfoLayer, currentInfoName;
 OpenLayers.ProxyHost = "./resources/cgi-bin/proxy.cgi?url=";
 
+function geocode(){
+	
+	if (navigator.geolocation){
+		navigator.geolocation.getCurrentPosition(geocodingChangePage);
+	}
+
+}
+
+function geocodingChangePage(position) {
+	var latitude = position.coords.latitude;
+	var longitude = position.coords.longitude; 
+	alert(latitude + " " + longitude);
+	if(latitude != null || longitude != null){
+		var newUrl = window.location.href + "mapa.html?lat="+latitude + "&lng="+longitude;
+		window.location.href = newUrl;
+	}
+}
+
 function initMap() {
 	map = new OpenLayers.Map("map",{
 		controls: [

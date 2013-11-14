@@ -70,6 +70,21 @@
 						<a href="http://dados.gov.br/tag/Equipamentos%20p%C3%BAblicos">link</a>.
 					
 						<br/><br/>
+						
+						Os dados foram obtidos em arquivos separados por vírgula (csv) e feito a carga desses dados em um Banco de Dados
+						com suporte espacial (PostgreSQL + PostGis). Os dados que disponha de latitude e longitude, foi necessário apenas
+						a criação de uma geometria com esse pontos; no entanto os dados que não contiam latitude nem longitude, como Cartórios,
+						Sistema Nacional de Empregos (SINE) e Unidades de Atendimento da Receita Federal, foi realizado
+						um geocoding (conversão de um endereço em uma localização geográfica) para então ser criada a geometria com os pontos.
+						Alertamos que a precisão do geocoding depende completude dos dados para correta conversão, ou seja, os registros de dados
+						que continham endereço, bairro, município e estado tiveram sucesso na conversão ao contrário dos registros que não detinham
+						todas essas informações. 
+						
+						<br/><br/>
+						
+						Para realizar a conversão dos dados, foi utilizado uma <a href="https://code.google.com/p/gmaps-samples/source/browse/trunk/geocoder/java/GeocodingSample.java?r=2476">API Geocoding do Google Maps</a>.
+					
+						<br/><br/>
 					
 					<h1>Licença</h1>
 					

@@ -22,7 +22,6 @@ function geocode(){
 function geocodingChangePage(position) {
 	var latitude = position.coords.latitude;
 	var longitude = position.coords.longitude; 
-	alert(latitude + " " + longitude);
 	if(latitude != null || longitude != null){
 		var newUrl = window.location.href + "mapa.html?lat="+latitude + "&lng="+longitude;
 		window.location.href = newUrl;

@@ -53,7 +53,7 @@ function initMap() {
 	var cartorio = getLayer("cartorio", "Cartório", "resources/images/cartorioIcon.png");
 	var sine = getLayer("sine", "Sistema Nacional de Empregos", "resources/images/sineIcon.png");
 	var receitaFederal = getLayer("receitafederal", "Unidades de Atendimento da Receita Federal", "resources/images/receitaFederalIcon.png");
-	var ies = getLayer("ies", "Universidades Federais", "resources/images/iesIcon.png");
+	var ies = getLayer("ies", "Universidades e Institutos Federais", "resources/images/iesIcon.png");
 	var mte = getLayer("mte", "Agências de atendimaneto do Ministério do Trabalho e Emprego", "resources/images/mteIcon.png");
 	var dpf = getLayer("departamentopoliciafederal", "Delegacias da Polícia Federal", "resources/images/policiaFederalIcon.png");
 

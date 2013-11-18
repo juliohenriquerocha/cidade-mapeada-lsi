@@ -74,11 +74,12 @@
 						Os dados foram obtidos em arquivos separados por vírgula (csv) e feito a carga desses dados em um Banco de Dados
 						com suporte espacial (PostgreSQL + PostGis). Os dados que disponha de latitude e longitude, foi necessário apenas
 						a criação de uma geometria com esse pontos; no entanto os dados que não contiam latitude nem longitude, como Cartórios,
-						Sistema Nacional de Empregos (SINE) e Unidades de Atendimento da Receita Federal, foi realizado
-						um geocoding (conversão de um endereço em uma localização geográfica) para então ser criada a geometria com os pontos.
-						Alertamos que a precisão do geocoding depende completude dos dados para correta conversão, ou seja, os registros de dados
-						que continham endereço, bairro, município e estado tiveram sucesso na conversão ao contrário dos registros que não detinham
-						todas essas informações. 
+						Sistema Nacional de Empregos (SINE), Unidades de Atendimento da Receita Federal, Agências de atendimaneto do Ministério 
+						do Trabalho e Emprego (MTE), Delegacias da Polícia Federal e Universidade Federais (extraídas dos dados sobre Instituições 
+						de Ensino Superior - IES), foi realizado um geocoding (conversão de um endereço em uma localização geográfica) para então 
+						ser criada a geometria com os pontos. Alertamos que a precisão do geocoding depende completude dos dados para correta conversão,
+						ou seja, os registros de dados	que continham endereço, bairro, município e estado tiveram sucesso na conversão ao contrário 
+						dos registros que não detinham	todas essas informações. 
 						
 						<br/><br/>
 						

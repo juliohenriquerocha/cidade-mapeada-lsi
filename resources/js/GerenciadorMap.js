@@ -5,7 +5,7 @@ var map;
 var marker; 
 var markers;
 var markerPath = './resources/images/icons/marker.png';
-var geoserverURL = "http://150.165.75.171:8081/geoserver/DadosAbertos/wms";
+var geoserverURL = "http://150.165.75.163:8080/geoserver/DadosAbertos/wms";
 var geocoder = new google.maps.Geocoder();
 var info;
 var currentInfoLayer, currentInfoName;
@@ -53,6 +53,9 @@ function initMap() {
 	var cartorio = getLayer("cartorio", "Cartório", "resources/images/cartorioIcon.png");
 	var sine = getLayer("sine", "Sistema Nacional de Empregos", "resources/images/sineIcon.png");
 	var receitaFederal = getLayer("receitafederal", "Unidades de Atendimento da Receita Federal", "resources/images/receitaFederalIcon.png");
+	var ies = getLayer("ies", "Universidades Federais", "resources/images/iesIcon.png");
+	var mte = getLayer("mte", "Agências de atendimaneto do Ministério do Trabalho e Emprego", "resources/images/mteIcon.png");
+	var dpf = getLayer("departamentopoliciafederal", "Delegacias da Polícia Federal", "resources/images/policiaFederalIcon.png");
 
 	//Controles
 	map.addControl(new OpenLayers.Control.LayerSwitcher(
@@ -60,7 +63,7 @@ function initMap() {
 				}));
 	
 	map.addLayer(gmap);
-	map.addLayers([ubs, cras, creas, redeprivada, fundacentro, comunidadesTerapeuticas, cartorio, sine, receitaFederal]);
+	map.addLayers([ubs, cras, creas, redeprivada, fundacentro, comunidadesTerapeuticas, cartorio, sine, receitaFederal, ies, mte, dpf]);
 	
 	setCenterPoint();
 	

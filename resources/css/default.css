@@ -12,16 +12,21 @@ h1, .h1 {
 }
 
 #map{
-	width: 85%;
+	width: 80%;
 	min-height: 550px;
 	height: 100%;
 	float: left;
 }
 
 .layerSwitcher{
-	width: 15%;
+	width: 20%;
 	height: 100%;
 	float: left;
+}
+
+.layerSwitcherDiv {
+	overflow: auto;
+	height: 94%;
 }
 
 #content {
@@ -53,6 +58,11 @@ h1, .h1 {
 }
 
 /** Modificações **/
+.panel-body {
+	padding: 0;
+	height: 100%;
+}
+
 .navbar-brand {
 	padding: 9px 15px;
 }
